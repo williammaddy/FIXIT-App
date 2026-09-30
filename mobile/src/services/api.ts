@@ -2,15 +2,17 @@ import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 import { useAuthStore } from '../store/authStore';
 
-const API_URL = process.env.EXPO_PUBLIC_API_URL || 'http://10.0.2.2:5000';
+const rawUrl = (process.env.EXPO_PUBLIC_API_URL || 'http://10.0.2.2:5000').trim().replace(/\/+$/, '');
+const API_URL = rawUrl.endsWith('/api') ? rawUrl : `${rawUrl}/api`;
 
 export const api = axios.create({
-  baseURL: `${API_URL}/api`,
+  baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
   timeout: 15000,
 });
+
 
 api.interceptors.request.use(
   async (config) => {
