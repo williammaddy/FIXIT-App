@@ -1,4 +1,5 @@
-const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
+const BASE_URL = process.env.BASE_URL || 'http://127.0.0.1:5000';
+
 
 async function runSmokeTest() {
   console.log(`Starting FixIt Backend Smoke Test against ${BASE_URL}...\n`);
